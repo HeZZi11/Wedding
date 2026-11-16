@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Husain & Batool — Wedding Invitation | 29 November 2026</title>
-  <meta name="description" content="You are warmly invited to the Daris ane Khushi nu Jaman of Husain & Batool — Sunday, 29 November 2026, after Maghrib at Amjhera, Mawaid." />
+  <title>Husain & Batul — Wedding Invitation | 29 November 2026</title>
+  <meta name="description" content="You are warmly invited to the Daris ane Khushi nu Jaman of Husain & Batul — Sunday, 29 November 2026, after Maghrib at Amjhera, Mawaid." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Aref+Ruqaa:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Great+Vibes&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
@@ -17,23 +17,16 @@
     <div class="door door-r"></div>
     <div class="intro-card">
       <p class="arabic bismillah">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
-      <p class="eyebrow">You are invited</p>
-      <h2 class="script">Husain &amp; Batool</h2>
+      <div id="guestWrap" class="guest-wrap" style="display:none;">
+        <p class="eyebrow">Warmly Invited</p>
+        <h3 class="guest-name script" id="guestName"></h3>
+        <div class="ornament-mini">❖</div>
+      </div>
+      <p class="eyebrow" id="defaultEyebrow">You are invited</p>
+      <h2 class="script">Husain &amp; Batul</h2>
       <button class="btn" id="openBtn">Open Invitation</button>
     </div>
   </div>
-
-  <nav class="nav" id="nav">
-    <a href="#home" class="nav-logo script">H &amp; B</a>
-    <div class="nav-links">
-      <a href="#blessings">Blessings</a>
-      <a href="#couple">Couple</a>
-      <a href="#event">Event</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#rsvp">RSVP</a>
-      <a href="#wishes">Wishes</a>
-    </div>
-  </nav>
 
   <main>
     <!-- HERO -->
@@ -46,7 +39,7 @@
         <p class="eyebrow stagger" style="--i:1">Save The Date</p>
         <p class="hero-date stagger" style="--i:2">29 <span>|</span> NOV <span>|</span> 2026</p>
         <div class="monogram stagger" style="--i:3" aria-hidden="true"><span class="m-h arabic-ruqaa">ح</span><span class="m-heart">♡</span><span class="m-b arabic-ruqaa">ب</span></div>
-        <h1 class="stagger" style="--i:4"><span class="script shimmer">Husain</span><span class="amp">&amp;</span><span class="script shimmer">Batool</span></h1>
+        <h1 class="stagger" style="--i:4"><span class="script shimmer">Husain</span><span class="amp">&amp;</span><span class="script shimmer">Batul</span></h1>
         <p class="arabic hero-ar stagger" style="--i:5" dir="rtl">حُسَين <small>ني شادي</small> بتول</p>
         <div class="divider stagger" style="--i:6"><span></span>❖<span></span></div>
         <p class="hero-sub stagger" style="--i:7">Daris ane Khushi nu Jaman</p>
@@ -105,16 +98,16 @@
           </div>
           <article class="card person reveal">
             <p class="arabic big" dir="rtl">بتول</p>
-            <h3 class="script">Batool</h3>
+            <h3 class="script">Batul</h3>
             <p class="role">The Bride</p>
-            <p class="arabic small-ar" dir="rtl">(سليم بهن سيف الدين بهائ رونجا والا)</p>
-            <p>Daughter of <strong>Saleem bhen &amp; Saifuddin bhai Roanjawala</strong></p>
+            <p class="arabic small-ar" dir="rtl">(نسيم بهن سيف الدين بهائ رونيجا والا)</p>
+            <p>Daughter of <strong>Naseem bhen &amp; Saifuddin bhai Runijsawala</strong></p>
             <p class="muted">Khachrod</p>
           </article>
         </div>
         <blockquote class="invite-text reveal">
-          <p class="arabic" dir="rtl">انے ساتھ همارا پوتا محمد (ابن منصور بهائ ، رقية بهن ازي) نا ختان نا سهرا ني مسرت نصيب ثئ چھے</p>
-          <p>Along with this, we are also blessed with the joy of the <em>Khatan</em> of our grandson <strong>Mohammed</strong> (son of Mansoor bhai &amp; Ruqaiyah bhen Ezzi). On this happy occasion, we humbly request your presence. Kindly wear <em>Libas al-Anwar</em> and grace us — we shall be truly grateful.</p>
+          <p class="arabic" dir="rtl">انے ساتھ همارا پوتا محمد (ابن منصور بهائ ، رقية بهن ازي) نا سهرا ني مسرت نصيب ثئ چھے</p>
+          <p>Along with this, we are also blessed with the joy of the <em>Sehra</em> of our grandson <strong>Mohammed</strong> (son of Mansoor bhai &amp; Ruqaiyah bhen Ezzi). On this happy occasion, we humbly request your presence. Kindly wear <em>Libas al-Anwar</em> and grace us — we shall be truly grateful.</p>
         </blockquote>
       </div>
     </section>
@@ -126,8 +119,8 @@
         <h2 class="title center">How the Night Unfolds</h2>
         <ol class="timeline">
           <li class="reveal"><span class="dot"></span><h3>Maghrib &amp; Isha Namaz</h3><p>We begin the blessed evening with namaz together.</p></li>
-          <li class="reveal"><span class="dot"></span><h3>Daris</h3><p>A gathering of zikr and dua for Husain &amp; Batool.</p></li>
-          <li class="reveal"><span class="dot"></span><h3>Khatan Celebration</h3><p>Sharing the joy of Mohammed's sehra.</p></li>
+          <li class="reveal"><span class="dot"></span><h3>Daris</h3><p>A gathering of zikr and dua for Husain &amp; Batul.</p></li>
+          <li class="reveal"><span class="dot"></span><h3>Sehra Celebration</h3><p>Sharing the joy of Mohammed's sehra.</p></li>
           <li class="reveal"><span class="dot"></span><h3>Khushi nu Jaman</h3><p>Dinner in thaal at Mawaid with family &amp; loved ones.</p></li>
         </ol>
       </div>
@@ -142,7 +135,7 @@
         <div class="event-grid">
           <div class="card info reveal"><div class="icon">📅</div><h3>Date</h3><p>Sunday, 29 November 2026</p><p class="muted">20 Jumadal Ukhra 1448 H</p></div>
           <div class="card info reveal"><div class="icon">🌙</div><h3>Time</h3><p>After Maghrib</p><p class="muted">Please arrive in time for namaz</p></div>
-          <div class="card info reveal"><div class="icon">🕌</div><h3>Venue</h3><p>Mawaid, Amjhera</p><p class="muted">Madhya Pradesh</p></div>
+          <div class="card info reveal"><div class="icon">🕌</div><h3>Venue</h3><p>Fakhri Masjid, Amjhera</p><p class="muted">Madhya Pradesh</p></div>
         </div>
         <div class="map reveal">
           <iframe title="Venue map — Amjhera" loading="lazy" src="https://www.google.com/maps?q=Amjhera,Madhya+Pradesh&output=embed"></iframe>
@@ -152,23 +145,8 @@
       </div>
     </section>
 
-    <!-- GALLERY -->
-    <section class="section" id="gallery">
-      <div class="container">
-        <p class="eyebrow center">Glimpses</p>
-        <h2 class="title center">The Invitation</h2>
-        <div class="gallery">
-          <figure class="g g1 reveal"><div class="g-art"><span class="arabic-ruqaa">ح</span></div><figcaption>Save the Date</figcaption></figure>
-          <figure class="g g2 reveal"><img src="assets/lantern.png" alt="Golden lantern" /><figcaption>Noor of the evening</figcaption></figure>
-          <figure class="g g3 reveal"><div class="g-art"><span class="arabic">بِسْمِ الله</span></div><figcaption>In the name of Allah</figcaption></figure>
-          <figure class="g g4 reveal"><div class="g-art"><span class="script">29.11.26</span></div><figcaption>A day to remember</figcaption></figure>
-          <figure class="g g5 reveal"><div class="g-art"><span class="arabic">حُسَين ♡ بتول</span></div><figcaption>Husain &amp; Batool</figcaption></figure>
-        </div>
-      </div>
-    </section>
-
     <!-- RSVP -->
-    <section class="section section-raised" id="rsvp">
+    <section class="section" id="rsvp">
       <div class="container narrow">
         <p class="eyebrow center">Kindly respond</p>
         <h2 class="title center">Will You Join Us?</h2>
@@ -189,7 +167,7 @@
     </section>
 
     <!-- WISHES -->
-    <section class="section" id="wishes">
+    <section class="section section-raised" id="wishes">
       <div class="container narrow">
         <p class="eyebrow center">Duas for the couple</p>
         <h2 class="title center">Send Your Wishes</h2>
@@ -197,8 +175,8 @@
           <label>Name<input id="wName" required /></label>
           <label>Your Dua / Message<textarea id="wMsg" rows="3" required></textarea></label>
           <button class="btn" type="submit" id="wishSubmit">Send Wishes</button>
+          <p class="form-msg" id="wishMsg"></p>
         </form>
-        <div class="wish-list" id="wishList"></div>
       </div>
     </section>
   </main>
@@ -206,13 +184,13 @@
   <!-- FOOTER -->
   <footer class="footer">
     <p class="eyebrow">Awaiting your presence</p>
-    <p class="arabic" dir="rtl">حكيم الدين بهائ رجب علي · ازي انے شاكر</p>
-    <p>Hakimuddin bhai Rajab Ali · Ezzi &amp; Shakir</p>
+    <p class="arabic" dir="rtl">حكيم الدين بهائ رجب علي </p>
+    <p>Ezzi &amp; Shakir</p>
     <p class="arabic small-ar" dir="rtl">فيمليٰ نے قرابة دارو نا سلام</p>
     <div class="ornament">❖</div>
-    <p class="script footer-name">Ezzi wala family</p>
+    <p class="script footer-name">Ezzi - family</p>
     <p>Firm: Fakhri General Store · <a href="tel:+919977547550">☎ 9977547550</a></p>
-    <p class="muted copy">Husain &amp; Batool · 29 · 11 · 2026</p>
+    <p class="muted copy">Husain &amp; Batul · 29 · 11 · 2026</p>
   </footer>
 
   <!-- Background music -->
@@ -222,6 +200,6 @@
     <svg class="ic-off" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="m23 9-6 6"/><path d="m17 9 6 6"/></svg>
   </button>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=3"></script>
 </body>
 </html>

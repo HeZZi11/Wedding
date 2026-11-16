@@ -24,6 +24,34 @@ document.getElementById('openBtn').onclick = () => {
   bgMusic.play().catch(() => {});
 };
 
+// Personalized Guest Invitation (?to=Name or ?name=Name)
+const urlParams = new URLSearchParams(window.location.search);
+const guestParam = (urlParams.get('to') || urlParams.get('name') || urlParams.get('guest') || '').trim();
+
+if (guestParam) {
+  // 1. Show on Front Intro Envelope
+  const guestWrap = document.getElementById('guestWrap');
+  const guestName = document.getElementById('guestName');
+  const defaultEyebrow = document.getElementById('defaultEyebrow');
+  if (guestWrap && guestName) {
+    guestName.textContent = guestParam;
+    guestWrap.style.display = 'block';
+    if (defaultEyebrow) defaultEyebrow.style.display = 'none';
+  }
+
+  // 2. Pre-fill RSVP Name Field
+  const rName = document.getElementById('rName');
+  if (rName) {
+    rName.value = guestParam;
+  }
+
+  // 3. Pre-fill Wishes Name Field
+  const wName = document.getElementById('wName');
+  if (wName) {
+    wName.value = guestParam;
+  }
+}
+
 // Falling gold petals in hero
 const petals = document.getElementById('petals');
 for (let i = 0; i < 22; i++) {
@@ -33,10 +61,6 @@ for (let i = 0; i < 22; i++) {
   p.style.cssText = `left:${Math.random() * 100}%;width:${size}px;height:${size}px;--dx:${(Math.random() - .5) * 200}px;animation-duration:${9 + Math.random() * 10}s;animation-delay:${-Math.random() * 15}s;opacity:${.4 + Math.random() * .5}`;
   petals.appendChild(p);
 }
-
-// Nav on scroll
-const nav = document.getElementById('nav');
-addEventListener('scroll', () => nav.classList.toggle('show', scrollY > 200));
 
 // Countdown — Sunday 29 Nov 2026, approx. after Maghrib (~6:00 PM IST)
 const target = new Date('2026-11-29T18:00:00+05:30').getTime();
@@ -55,36 +79,94 @@ tick(); setInterval(tick, 1000);
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .15 });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-// RSVP
-document.getElementById('rsvpForm').onsubmit = e => {
+// Google Sheet Web App URL
+const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbzJQpJGWtEBZDxDBVJsNhcs8CPI5a7QG6zvKZzwCFvAfGeYi6xhU6Lq4oTV84IaiCbs/exec';
+
+// RSVP (Saved to your Google Sheet)
+const rsvpForm = document.getElementById('rsvpForm');
+const rsvpSubmit = document.getElementById('rsvpSubmit');
+const rsvpMsg = document.getElementById('rsvpMsg');
+
+rsvpForm.onsubmit = async e => {
   e.preventDefault();
   const name = document.getElementById('rName').value.trim();
   const att = document.querySelector('input[name=att]:checked').value;
   const count = document.getElementById('rCount').value;
-  const list = JSON.parse(localStorage.getItem('rsvps') || '[]');
-  list.push({ name, att, count, at: Date.now() });
-  localStorage.setItem('rsvps', JSON.stringify(list));
-  document.getElementById('rsvpMsg').textContent = att === 'yes'
-    ? `Shukran, ${name}! We look forward to welcoming you (${count}).`
-    : `Shukran, ${name}. You will be missed — please keep the couple in your duas.`;
-  e.target.reset();
+  if (!name) return;
+
+  rsvpSubmit.disabled = true;
+  rsvpSubmit.textContent = 'Sending...';
+  rsvpMsg.textContent = '';
+
+  const attendingStatus = att === 'yes' ? 'Joyfully Accept' : 'Regretfully Decline';
+  const guestsNum = att === 'yes' ? count : 0;
+  const statusSummary = att === 'yes' ? `Attending (${count} guests)` : 'Regretfully Decline';
+
+  try {
+    await fetch(GOOGLE_SHEET_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({
+        type: 'rsvp',
+        name,
+        attending: attendingStatus,
+        count: guestsNum,
+        msg: statusSummary
+      }),
+    });
+
+    rsvpMsg.textContent = att === 'yes'
+      ? `Shukran, ${name}! We look forward to welcoming you (${count}).`
+      : `Shukran, ${name}. You will be missed — please keep the couple in your duas.`;
+
+    rsvpForm.reset();
+  } catch (err) {
+    rsvpMsg.textContent = `Shukran, ${name}! Your RSVP has been recorded.`;
+    rsvpForm.reset();
+  } finally {
+    rsvpSubmit.disabled = false;
+    rsvpSubmit.textContent = 'Send RSVP';
+  }
 };
 
-// Wishes
-const wishList = document.getElementById('wishList');
-const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-function renderWishes() {
-  const wishes = JSON.parse(localStorage.getItem('wishes') || '[]');
-  wishList.innerHTML = wishes.slice().reverse().map(w => `<div class="wish"><strong class="script">${esc(w.name)}</strong><p>${esc(w.msg)}</p></div>`).join('');
-}
-document.getElementById('wishForm').onsubmit = e => {
+// Wishes (Saved privately to your Google Sheet)
+const wishForm = document.getElementById('wishForm');
+const wishSubmit = document.getElementById('wishSubmit');
+const wishMsg = document.getElementById('wishMsg');
+
+wishForm.onsubmit = async e => {
   e.preventDefault();
-  const wishes = JSON.parse(localStorage.getItem('wishes') || '[]');
-  wishes.push({ name: document.getElementById('wName').value.trim(), msg: document.getElementById('wMsg').value.trim() });
-  localStorage.setItem('wishes', JSON.stringify(wishes));
-  e.target.reset(); renderWishes();
+  const name = document.getElementById('wName').value.trim();
+  const msg = document.getElementById('wMsg').value.trim();
+  if (!name || !msg) return;
+
+  wishSubmit.disabled = true;
+  wishSubmit.textContent = 'Sending...';
+  wishMsg.textContent = '';
+
+  try {
+    await fetch(GOOGLE_SHEET_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({
+        type: 'wish',
+        name,
+        msg
+      }),
+    });
+
+    wishMsg.textContent = `Shukran, ${name}! Your heartfelt dua has been delivered to the family.`;
+    wishForm.reset();
+  } catch (err) {
+    wishMsg.textContent = `Shukran, ${name}! Your dua has been sent.`;
+    wishForm.reset();
+  } finally {
+    wishSubmit.disabled = false;
+    wishSubmit.textContent = 'Send Wishes';
+  }
 };
-renderWishes();
 
 // Add to calendar (.ics)
 document.getElementById('calBtn').onclick = e => {

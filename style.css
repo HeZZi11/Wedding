@@ -248,6 +248,24 @@ img {
   line-height: 1.2
 }
 
+.guest-wrap {
+  margin: 6px 0 8px;
+}
+
+.guest-name {
+  font-size: 36px;
+  color: var(--maroon);
+  line-height: 1.2;
+  margin: 2px 0 4px;
+  word-break: break-word;
+}
+
+.ornament-mini {
+  color: var(--gold);
+  font-size: 13px;
+  margin: 2px 0 6px;
+}
+
 .bismillah {
   color: var(--gold);
   font-size: 22px
