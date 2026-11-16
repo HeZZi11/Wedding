@@ -750,7 +750,22 @@ body.opened .stagger {
 }
 
 .info .icon {
-  font-size: 32px
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 4px;
+  background: var(--raised);
+  border-radius: 50%;
+  border: 2px solid var(--gold-l);
+  color: var(--gold);
+}
+
+.info .icon svg {
+  color: var(--gold);
+  stroke: var(--gold);
 }
 
 .info h3 {
