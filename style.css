@@ -1266,3 +1266,19 @@ textarea:focus {
     height: 46px
   }
 }
+
+
+/* ── Hide Netlify free-tier "Powered by Netlify" badge ── */
+[data-netlify-badge],
+.netlify-badge,
+#netlify-badge,
+netlify-badge,
+#nl-badge,
+.nl-badge,
+[data-nf-variant],
+.nf-badge {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}

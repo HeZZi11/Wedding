@@ -180,3 +180,26 @@ document.getElementById('calBtn').onclick = e => {
   a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' }));
   a.download = 'husain-batool-wedding.ics'; a.click();
 };
+
+
+// ── Hide Netlify free-tier badge (Shadow DOM) ──
+(function hideNetlifyBadge() {
+  const SELECTORS = [
+    '[data-netlify-badge]', '.netlify-badge', '#netlify-badge',
+    'netlify-badge', '#nl-badge', '.nl-badge', '[data-nf-variant]'
+  ];
+  const hide = () => {
+    SELECTORS.forEach(sel => {
+      document.querySelectorAll(sel).forEach(el => {
+        el.style.cssText = 'display:none!important;visibility:hidden!important;opacity:0!important';
+      });
+    });
+    // Also nuke the Netlify HUD script element so it never injects
+    document.querySelectorAll('script[src*="netlify"][src*="hud"]').forEach(s => s.remove());
+  };
+  hide();
+  const obs = new MutationObserver(hide);
+  obs.observe(document.documentElement, { childList: true, subtree: true });
+  // Stop observing after 10 seconds (badge appears within first few seconds)
+  setTimeout(() => obs.disconnect(), 10000);
+})();
